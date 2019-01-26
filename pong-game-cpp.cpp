@@ -182,42 +182,30 @@ public:
 					std::cout << "\xB2";
 
 				if(ballX == j && ballY == i)
-					//std::cout << "O";	// ball
-					printf("%c", ballChar);
+					std::cout << "O";	// ball
 				else if(player1X == j && player1Y == i)
-					printf("%c", '\xDB');
-				//std::cout << "\xDB";	// player1
+				std::cout << "\xDB";	// player1
 				else if(player2X == j && player2Y == i)
-					printf("%c", '\xDB');
-				//std::cout << "\xDB";	// player2
+				std::cout << "\xDB";	// player2
 				else if(player1X == j && player1Y + 1 == i)
-					printf("%c", '\xDB');
-				//std::cout << "\xDB";	// player1 (extension)
+				std::cout << "\xDB";	// player1 (extension)
 				else if(player1X == j && player1Y + 2 == i)
-					printf("%c", '\xDB');
-				//std::cout << "\xDB";	// player1 (extension)
+				std::cout << "\xDB";	// player1 (extension)
 				else if(player1X == j && player1Y + 3 == i)
-					printf("%c", '\xDB');
-				//std::cout << "\xDB";	// player1 (extension)
+				std::cout << "\xDB";	// player1 (extension)
 				else if(player2X == j && player2Y + 1 == i)
-					printf("%c", '\xDB');
-				//std::cout << "\xDB";	// player2 (extension)
+				std::cout << "\xDB";	// player2 (extension)
 				else if(player2X == j && player2Y + 2 == i)
-					printf("%c", '\xDB');
-				//std::cout << "\xDB";	// player2 (extension)
+				std::cout << "\xDB";	// player2 (extension)
 				else if(player2X == j && player2Y + 3 == i)
-					printf("%c", '\xDB');
-				//std::cout << "\xDB";	// player2 (extension)
+				std::cout << "\xDB";	// player2 (extension)
 				else
-					printf(" ");
-					//std::cout << " ";
+					std::cout << " ";
 
 				if(j == width - 1)
-					printf("%c", '\xDB');
-					//std::cout << "\xB2";
+					std::cout << "\xB2";
 			}
-			printf("\n");
-			//std::cout << std::endl;
+			std::cout << std::endl;
 		}
 		for(int i = 0; i < width + 2; i++)
 		{
@@ -322,6 +310,7 @@ public:
 
 int main()
 {
+	std::ios_base::sync_with_stdio(0);
 	cGameManager game(40, 20);
 	game.Run();
 
