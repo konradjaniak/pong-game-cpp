@@ -19,7 +19,6 @@ public:
 		x = posX;
 		y = posY;
 		direction = STOP;
-		srand(time(NULL));
 	}
 
 	void Reset()
@@ -82,20 +81,83 @@ public:
 	}
 };
 
+class cPaddle
+{
+private:
+	int x, y;
+	int originalX, originalY;
+public:
+	cPaddle()
+	{
+		x = 0;
+		y = 0;
+	}
+	cPaddle(int posX, int posY) : cPaddle()
+	{
+		originalX = posX;
+		originalY = posY;
+		x = posX;
+		y = posY;
+	}
+	inline void Reset() { x = originalX; y = originalY; }
+	inline int getX() { return x; }
+	inline int getY() { return y; }
+	inline void moveUp() { y--; }
+	inline void moveDown() { y++; }
+	friend std::ostream & operator<<(std::ostream & o, cPaddle c)
+	{
+		o << "Paddle [" << c.x << ", " << c.y << "]";
+		return o;
+	}
+};
+
+class cGameManager
+{
+private:
+	int width, height;
+	int score1, score2;
+	char up1, down1, up2, down2;
+	bool quit;
+	cBall * ball;
+	cPaddle * player1;
+	cPaddle * player2;
+public:
+	cGameManager(int w, int h)
+	{
+		srand(time(NULL));
+		quit = false;
+		up1 = 'w';
+		up2 = 'i';
+		down1 = 's';
+		down2 = 'k';
+		score1 = 0;
+		score2 = 0;
+		width = w;
+		height = h;
+		ball = new cBall(w / 2, h / 2);
+		player1 = new cPaddle(1, h / 2 - 3);
+		player2 = new cPaddle(w - 2, h / 2 - 3);
+	}
+	~cGameManager()
+	{
+		delete ball, player1, player2;
+	}
+
+	void scoreUp(cPaddle * player)
+	{
+		if(player == player1)
+			score1++;
+		else if(player == player2)
+			score2++;
+		ball->Reset();
+		player1->Reset();
+		player2->Reset();
+	}
+};
+
 int main()
 {
-	cBall c(0, 0);
-	std::cout << c << std::endl;
-	c.randomDirection();
-	std::cout << c << std::endl;
-	c.Move();
-	std::cout << c << std::endl;
-	c.randomDirection();
-	c.Move();
-	std::cout << c << std::endl;
-	c.randomDirection();
-	c.Move();
-	std::cout << c << std::endl;
+	
 
 	return 0;
 }
